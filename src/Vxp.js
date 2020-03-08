@@ -1,26 +1,21 @@
 class Vxp {
-  constructor(options, viewAdapter) {
+  constructor(viewAdapter) {
     if (!viewAdapter) {
-      throw new Error("请提供视图适配器：vue 或者 react。");
+      throw new Error("请提供视图适配器：VueAdapter 或者 ReactAdapter !!!");
     }
-    this._v = viewAdapter;
-    this._options = options;
-    this._init();
-  }
-  _init() {
-    if (this.options.plugins) this.use(this.options.plugins);
-    if (this.options.el) this.render(el);
+    this.v = viewAdapter;
   }
   render(el) {
-    this._v.render(el);
+    this.v.render(el);
+    return this;
   }
   use(plugin) {
     if (Array.isArray(plugin)) {
       plugin.forEach(_plugin => this.use(_plugin));
-      return
+      return this;
     }
     if (plugin.used) {
-      return
+      return this;
     }
     if (typeof plugin === 'function') {
       plugin(this);
@@ -30,6 +25,7 @@ class Vxp {
       throw new Error("Invalid argument: plugin");
     }
     plugin.used = true;
+    return this;
   }
 }
 
