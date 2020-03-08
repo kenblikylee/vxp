@@ -1,8 +1,7 @@
 class Vxp {
   constructor(options, viewAdapter) {
     if (!viewAdapter) {
-      console.error("请提供视图适配器：vue 或者 react。");
-      return;
+      throw new Error("请提供视图适配器：vue 或者 react。");
     }
     this._v = viewAdapter;
     this._options = options;
@@ -10,7 +9,10 @@ class Vxp {
   }
   _init() {
     if (this.options.plugins) this.use(this.options.plugins);
-    if (this.options.el) this._v.render(el);
+    if (this.options.el) this.render(el);
+  }
+  render(el) {
+    this._v.render(el);
   }
   use(plugin) {
     if (Array.isArray(plugin)) {
