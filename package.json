@@ -1,6 +1,40 @@
 {
   "name": "vxp",
   "version": "1.0.0-alpha",
+  "main": "dist/index.js",
   "module": "src/index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "transform": "babel src -d lib",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.1.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "corejs": 3,
+          "useBuiltIns": "entry"
+        }
+      ]
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "ie >= 9"
+  ]
 }

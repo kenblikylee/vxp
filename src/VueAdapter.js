@@ -45,7 +45,9 @@ class VueAdapter extends ViewAdapter {
     new Vue({
       router: this.router,
       store: this.store,
-      render: h => <div><router-view /></div>
+      render: h => {
+        return h('div', h('router-view'))
+      }
     }).$mount(el);
     this._rendered = true;
   }
