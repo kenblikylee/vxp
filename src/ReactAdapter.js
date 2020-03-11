@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import ViewAdapter from "./ViewAdapter";
 
-function App(routes) {
+function App(props) {
   const e = React.createElement;
-  routes = routes.map(route => {
+  let routes = props.routes.map(route => {
     let props = {
       path: route.path
     }
@@ -32,7 +32,7 @@ class ReactAdapter extends ViewAdapter {
   }
   render(el) {
     if (this._rendered) return;
-    ReactDOM.render(App(this._routes), document.querySelector(el));
+    ReactDOM.render(React.createElement(App, { routes: this._routes }), document.querySelector(el));
     this._rendered = true;
   }
 }
