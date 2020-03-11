@@ -1,3 +1,5 @@
+import VxpPlugin from "./VxpPlugin";
+
 class Vxp {
   constructor(viewAdapter) {
     if (!viewAdapter) {
@@ -17,10 +19,10 @@ class Vxp {
     if (plugin.used) {
       return this;
     }
-    if (typeof plugin === 'function') {
-      plugin(this);
-    } else if (typeof plugin === 'object') {
+    if (plugin instanceof VxpPlugin) {
       plugin.apply(this);
+    } else if (typeof plugin === 'function') {
+      plugin(this);
     } else {
       throw new Error("Invalid argument: plugin");
     }
